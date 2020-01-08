@@ -11,8 +11,15 @@ class TutorialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tutorial)
 
         supportFragmentManager
-            .beginTransaction()
+                .beginTransaction()
             .replace(R.id.container, TutorialItemFragment())
+            .commit()
+    }
+
+    fun showNext() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, TutorialItemFragment2())
             .commit()
     }
 }
