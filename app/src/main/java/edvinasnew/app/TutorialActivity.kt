@@ -2,7 +2,6 @@ package edvinasnew.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 
 class TutorialActivity : AppCompatActivity() {
 
@@ -12,14 +11,31 @@ class TutorialActivity : AppCompatActivity() {
 
         supportFragmentManager
                 .beginTransaction()
-            .replace(R.id.container, TutorialItemFragment())
+            .replace(R.id.container,  TutorialItemFragment.newInstance("Puslapis", 0, R.drawable.new2))
             .commit()
     }
 
-    fun showNext() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, TutorialItemFragment2())
-            .commit()
+    fun showNext(currentPage: Int) {
+        if (currentPage == 2){
+            finish()
+            return
+        }
+
+        when (currentPage) {
+            0 -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container,  TutorialItemFragment.newInstance("Puslapis", currentPage + 1, R.drawable.google))
+                    .commit()
+            }
+            1 -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container,  TutorialItemFragment.newInstance("Puslapis", currentPage + 1, R.drawable.new2))
+                    .commit()
+            }
+        }
+
+
     }
 }

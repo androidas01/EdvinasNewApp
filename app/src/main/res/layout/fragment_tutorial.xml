@@ -35,7 +35,7 @@ tools:context=".MainActivity">
     android:id="@+id/next"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Back"
+    android:text="next"
     android:layout_marginBottom="50dp"
 
     app:layout_constraintBottom_toBottomOf="parent"
