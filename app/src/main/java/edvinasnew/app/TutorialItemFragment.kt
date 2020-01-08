@@ -14,7 +14,7 @@ class TutorialItemFragment : Fragment() {
     var page: Int = 0;
     var tutorialImage: Int = 0
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tutorialText = arguments!!.getString(KEY_LABEL) ?: ""
         page = arguments!!.getInt(KEY_PAGE)
@@ -33,6 +33,7 @@ class TutorialItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         textView.text = "$tutorialText $page"
         imageView.setImageResource(tutorialImage)
+        next.setBackgroundColor(R.drawable.ic_launcher_background)
         view.findViewById<Button>(R.id.next).setOnClickListener {
             //requireActivity().finish() //Pabaigia
 
@@ -40,12 +41,12 @@ class TutorialItemFragment : Fragment() {
         }
     }
 
-    companion object{
+    companion object {
         private const val KEY_LABEL = "tutorial_text"
         private const val KEY_PAGE = "page"
         private const val KEY_IMAGE = "tutorialImage"
 
-        fun newInstance (tutorialText: String, page: Int, tutorialImage: Int) : TutorialItemFragment {
+        fun newInstance(tutorialText: String, page: Int, tutorialImage: Int): TutorialItemFragment {
             val arguments = Bundle()
             arguments.putString(KEY_LABEL, tutorialText)
             arguments.putInt(KEY_PAGE, page)
