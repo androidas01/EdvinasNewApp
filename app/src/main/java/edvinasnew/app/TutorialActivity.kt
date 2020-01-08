@@ -9,9 +9,10 @@ class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
-        findViewById<Button>(R.id.next).setOnClickListener {
-                finish()
-        }
 
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, TutorialItemFragment())
+            .commit()
     }
 }
