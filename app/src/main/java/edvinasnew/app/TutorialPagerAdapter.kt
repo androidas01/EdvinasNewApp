@@ -7,11 +7,12 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 
 class TutorialPagerAdapter(fragmentManager: FragmentManager, private val resources: Resources) : FragmentPagerAdapter(fragmentManager) {
-    val Images = listOf(R.drawable.google, R.drawable.asdd, R.drawable.new2, R.drawable.matrix)
+    val Images = listOf(R.drawable.google, R.drawable.asdd, R.drawable.new2)
+    val Texts = listOf("GooooOOOgle it","asssdd", "newwwww")
 
     override fun getItem(position: Int): Fragment {
         val config = TutorialScreenConfig(
-            tutorialText = resources.getString(R.string.Puslapis),
+            tutorialText = Texts[position],
             page = position,
             tutorialImage = Images[position]
         )
