@@ -6,24 +6,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 
-class TutorialPagerAdapter(fragmentManager: FragmentManager, private val resources: Resources) : FragmentPagerAdapter(fragmentManager) {
-    val Images = listOf(R.drawable.google, R.drawable.asdd, R.drawable.new2)
-    val Texts = listOf("GooooOOOgle it","asssdd", "newwwww")
+class TutorialPagerAdapter(fragmentManager: FragmentManager, private val resources: Resources) :
+    FragmentPagerAdapter(fragmentManager) {
+    val configs = listOf(
+        TutorialScreenConfig("GooooOOOgle it", R.drawable.google),
+        TutorialScreenConfig("asssdd", R.drawable.asdd),
+        TutorialScreenConfig("newwwww", R.drawable.new2)
+    )
 
     override fun getItem(position: Int): Fragment {
-        val config = TutorialScreenConfig(
-            tutorialText = Texts[position],
-            page = position,
-            tutorialImage = Images[position]
-        )
-        return TutorialItemFragment.newInstance(config)
+        return TutorialItemFragment.newInstance(configs[position])
     }
 
     override fun getCount(): Int {
-        return PAGE_COUNT
-    }
-
-    companion object{
-        private const val PAGE_COUNT = 3
+        return configs.size
     }
 }

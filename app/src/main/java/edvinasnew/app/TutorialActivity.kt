@@ -16,16 +16,12 @@ class TutorialActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    fun showNext(pagePosition: Int) {
-        if (pagePosition > LAST_PAGE_INDEX) {
+    fun showNext() {
+        if (viewPager.currentItem >= viewPager.adapter!!.count - 1) {
             finish()
             return
         } else {
-            viewPager.currentItem = pagePosition
+            viewPager.currentItem = viewPager.currentItem + 1
         }
-    }
-
-    companion object{
-        private const val LAST_PAGE_INDEX = 2
     }
 }
