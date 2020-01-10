@@ -1,4 +1,4 @@
-package edvinasnew.app
+package edvinasnew.app.tutorial
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

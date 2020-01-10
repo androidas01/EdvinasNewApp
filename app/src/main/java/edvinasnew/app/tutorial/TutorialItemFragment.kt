@@ -1,4 +1,4 @@
-package edvinasnew.app
+package edvinasnew.app.tutorial
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import edvinasnew.app.R
 import kotlinx.android.synthetic.main.fragment_tutorial.*
 
 class TutorialItemFragment : Fragment() {
@@ -20,7 +21,9 @@ class TutorialItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val config = arguments!!.getParcelable<TutorialScreenConfig> (KEY_CONFIG)!!
+        val config = arguments!!.getParcelable<TutorialScreenConfig> (
+            KEY_CONFIG
+        )!!
         textView.text = "${config.tutorialText}"
         imageView.setImageResource(config.tutorialImage)
         next.setBackgroundColor(R.drawable.ic_launcher_background)

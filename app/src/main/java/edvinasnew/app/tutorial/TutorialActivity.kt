@@ -1,9 +1,9 @@
-package edvinasnew.app
+package edvinasnew.app.tutorial
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import edvinasnew.app.R
 import kotlinx.android.synthetic.main.activity_tutorial.*
-import kotlin.random.Random
 
 class TutorialActivity : AppCompatActivity() {
 
@@ -11,7 +11,10 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
 
-        val adapter = TutorialPagerAdapter(supportFragmentManager, resources)
+        val adapter = TutorialPagerAdapter(
+            supportFragmentManager,
+            resources
+        )
 
         viewPager.adapter = adapter
     }

@@ -3,7 +3,7 @@ package edvinasnew.app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import edvinasnew.app.tutorial.TutorialActivity
 
 class MainActivity : AppCompatActivity() {
 
