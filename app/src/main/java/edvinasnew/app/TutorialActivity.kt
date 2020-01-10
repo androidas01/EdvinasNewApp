@@ -2,6 +2,7 @@ package edvinasnew.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_tutorial.*
 import kotlin.random.Random
 
 class TutorialActivity : AppCompatActivity() {
@@ -10,75 +11,21 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
 
-        val config = TutorialScreenConfig(
-            tutorialText = getString(R.string.Puslapis),
-            page = 0,
-            tutorialImage = R.drawable.new2
-        )
+        val adapter = TutorialPagerAdapter(supportFragmentManager, resources)
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.container,
-                TutorialItemFragment.newInstance(
-                    config
-                )
-            )
-            .commit()
+        viewPager.adapter = adapter
     }
 
-    fun showNext(currentPage: Int) {
-        if (currentPage == 2) {
+    fun showNext(pagePosition: Int) {
+        if (pagePosition > LAST_PAGE_INDEX) {
             finish()
             return
+        } else {
+            viewPager.currentItem = pagePosition
         }
+    }
 
-        var Images = arrayOf(R.drawable.google, R.drawable.asdd, R.drawable.new2, R.drawable.matrix)
-        var n = Random.nextInt(3)
-
-        val config = TutorialScreenConfig(
-            tutorialText = getString(R.string.Puslapis),
-            page = currentPage + 1,
-            tutorialImage = Images[n]
-        )
-
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.container,
-                TutorialItemFragment.newInstance(
-                    config
-                )
-            )
-            .commit()
-
-//        when (currentPage) {
-//            0 -> {
-//                supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(
-//                        R.id.container,
-//                        TutorialItemFragment.newInstance(
-//                            "Puslapis",
-//                            currentPage + 1,
-//                            R.drawable.google
-//                        )
-//                    )
-//                    .commit()
-//            }
-//            1 -> {
-//                supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(
-//                        R.id.container,
-//                        TutorialItemFragment.newInstance(
-//                            "Puslapis",
-//                            currentPage + 1,
-//                             R.drawable.new2
-//                        )
-//                    )
-//                    .commit()
-//            }
-//        }
+    companion object{
+        private const val LAST_PAGE_INDEX = 2
     }
 }
