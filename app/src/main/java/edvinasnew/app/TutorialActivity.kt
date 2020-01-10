@@ -10,11 +10,19 @@ class TutorialActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
 
+        val config = TutorialScreenConfig(
+            tutorialText = getString(R.string.Puslapis),
+            page = 0,
+            tutorialImage = R.drawable.new2
+        )
+
         supportFragmentManager
             .beginTransaction()
             .replace(
                 R.id.container,
-                TutorialItemFragment.newInstance(getString(R.string.Puslapis), 0, R.drawable.new2)
+                TutorialItemFragment.newInstance(
+                    config
+                )
             )
             .commit()
     }
@@ -28,14 +36,18 @@ class TutorialActivity : AppCompatActivity() {
         var Images = arrayOf(R.drawable.google, R.drawable.asdd, R.drawable.new2, R.drawable.matrix)
         var n = Random.nextInt(3)
 
+        val config = TutorialScreenConfig(
+            tutorialText = getString(R.string.Puslapis),
+            page = currentPage + 1,
+            tutorialImage = Images[n]
+        )
+
         supportFragmentManager
             .beginTransaction()
             .replace(
                 R.id.container,
                 TutorialItemFragment.newInstance(
-                    getString(R.string.Puslapis),
-                    currentPage + 1,
-                    Images[n] //R.drawable.google
+                    config
                 )
             )
             .commit()
