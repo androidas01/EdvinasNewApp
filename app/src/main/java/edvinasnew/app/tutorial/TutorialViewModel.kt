@@ -19,7 +19,7 @@ class TutorialViewModel constructor(
         }
     }
 
-    override fun onCleared() {
+    override fun onCleared() { 
         super.onCleared()
     }
 }
