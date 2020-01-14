@@ -1,24 +1,24 @@
-package edvinasnew.app
+package edvinasnew.app.news
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import edvinasnew.app.tutorial.TutorialActivity
-import kotlinx.android.synthetic.main.item_source.view.*
+import edvinasnew.app.R
+import kotlinx.android.synthetic.main.item_news.view.*
 
-class SourceListItemeAdapter(
-    val listener: OnSourceSelectedListener
-) : RecyclerView.Adapter<SourceListItemeAdapter.ViewHolder>() {
+//import kotlinx.android.synthetic.main.item_source.view.*
 
-    private val list = mutableListOf<Source>()
+class NewsListItemAdapter : RecyclerView.Adapter<NewsListItemAdapter.ViewHolder>() {
+
+    private val list = mutableListOf<SourceArticle>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_source,
+                R.layout.item_news,
                 parent,
                 false
             )
@@ -33,21 +33,19 @@ class SourceListItemeAdapter(
         holder.bind(list[position])
     }
 
-    fun setItems(list: List<Source>) {
+    fun setItems(list: List<SourceArticle>) {
         this.list.clear()
         this.list.addAll(list)
+        println(list)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(source: Source) {
+        fun bind(source: SourceArticle) {
             itemView.title.text = source.title
             itemView.description.text = source.description
-            itemView.setOnClickListener {
-                listener.onSourceSelected(source)
-            }
+            //itemView.image.setImageResource(source.image)
+            itemView.date.text = source.date
         }
     }
 }
-
-

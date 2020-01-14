@@ -1,11 +1,11 @@
-package edvinasnew.app.tutorial
+package edvinasnew.app.main
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import edvinasnew.app.utils.SingleLiveData
 
-class TutorialViewModel constructor(
+class MainViewModel constructor(
     preferences: SharedPreferences
 ) : ViewModel() {
 
@@ -19,7 +19,7 @@ class TutorialViewModel constructor(
         }
     }
 
-    override fun onCleared() { 
+    override fun onCleared() {
         super.onCleared()
     }
 }

@@ -1,4 +1,4 @@
-package edvinasnew.app
+package edvinasnew.app.news
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import edvinasnew.app.R
+import edvinasnew.app.source.Source
+import edvinasnew.app.source.SourceViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 
 //import kotlinx.android.synthetic.main.fragment_source.*
 
 class NewsListFragment : Fragment() {
+
+    lateinit var viewModel: NewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +28,7 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val config = arguments!!.getParcelable<Source>(
-            NewsListFragment.KEY_ARTICLE
+            KEY_ARTICLE
         )!!
         recycler.layoutManager = LinearLayoutManager(requireContext())
 
@@ -34,8 +39,9 @@ class NewsListFragment : Fragment() {
                 SourceArticle(
                     "test asddddddddddddddddddddddddddddas sda ",
                     "description test",
-                     R.drawable.new2,
-                    "2020-01-10"
+                    "",//R.drawable.new2,
+                    "2020-01-10",
+                    ""
                 )
             )
         )
