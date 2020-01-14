@@ -17,7 +17,6 @@
         android:paddingBottom="2pt"
         />
 
-
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
@@ -26,7 +25,5 @@
         android:layout_marginRight="10dp"
         android:paddingBottom="10pt"
         />
-
-
 
 </LinearLayout>
