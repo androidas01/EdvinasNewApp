@@ -4,7 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_source.view.*
+import kotlinx.android.synthetic.main.fragment_tutorial.*
+import kotlinx.android.synthetic.main.item_news.view.*
+
+//import kotlinx.android.synthetic.main.item_source.view.*
 
 class NewsListItemAdapter : RecyclerView.Adapter<NewsListItemAdapter.ViewHolder>() {
 
@@ -33,6 +36,7 @@ class NewsListItemAdapter : RecyclerView.Adapter<NewsListItemAdapter.ViewHolder>
     fun setItems(list: List<SourceArticle>) {
         this.list.clear()
         this.list.addAll(list)
+        println(list)
         notifyDataSetChanged()
     }
 
@@ -40,6 +44,8 @@ class NewsListItemAdapter : RecyclerView.Adapter<NewsListItemAdapter.ViewHolder>
         fun bind(source: SourceArticle) {
             itemView.title.text = source.title
             itemView.description.text = source.description
+            itemView.image.setImageResource(source.image)
+            itemView.date.text = source.date
         }
     }
 }

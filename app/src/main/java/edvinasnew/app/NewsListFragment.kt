@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_source.*
+import kotlinx.android.synthetic.main.fragment_news.*
+
+//import kotlinx.android.synthetic.main.fragment_source.*
 
 class NewsListFragment : Fragment() {
 
@@ -30,9 +32,9 @@ class NewsListFragment : Fragment() {
         adapter.setItems(
             listOf<SourceArticle>(
                 SourceArticle(
-                    "title",
-                    "description",
-                    R.drawable.new2,
+                    "test asddddddddddddddddddddddddddddas sda ",
+                    "description test",
+                     R.drawable.new2,
                     "2020-01-10"
                 )
             )
