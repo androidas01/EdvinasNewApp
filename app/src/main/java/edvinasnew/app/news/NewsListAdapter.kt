@@ -1,24 +1,28 @@
-package edvinasnew.app.source
+package edvinasnew.app.news
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edvinasnew.app.R
-import kotlinx.android.synthetic.main.item_source.view.*
+import edvinasnew.app.utils.DownLoadImageTask
+import kotlinx.android.synthetic.main.activity_news.view.*
 
-class SourceListItemeAdapter(
-    val listener: OnSourceSelectedListener
-) : RecyclerView.Adapter<SourceListItemeAdapter.ViewHolder>() {
+//import kotlinx.android.synthetic.main.item_source.view.*
 
-    private val list = mutableListOf<Source>()
+class NewsListAdapter(
+    //val onSelected: (NewsItem) -> Unit
+) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+
+    private val list = mutableListOf<NewsItem>()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_source,
+                R.layout.activity_news,
                 parent,
                 false
             )
@@ -33,21 +37,24 @@ class SourceListItemeAdapter(
         holder.bind(list[position])
     }
 
-    fun setItems(list: List<Source>) {
+    fun setItems(list: List<NewsItem>) {
         this.list.clear()
         this.list.addAll(list)
+        println(list)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(source: Source) {
+        fun bind(source: NewsItem) {
+
             itemView.title.text = source.title
             itemView.description.text = source.description
-            itemView.setOnClickListener {
-                listener.onSourceSelected(source)
-            }
+            itemView.datetime.text = source.date
+            DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
+            //itemView.image.setImageResource(source.image)
+//            itemView.setOnClickListener {
+//                onSelected(source)
+//            }
         }
     }
 }
-
-

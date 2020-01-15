@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_source.*
 class SourceListFragment : Fragment() {
 
     lateinit var viewModel: SourceViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,24 +38,30 @@ class SourceListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = SourceListItemeAdapter(object :
-            OnSourceSelectedListener {
-            override fun onSourceSelected(source: Source) {
-                this@SourceListFragment.onSourceSelected(source)
-            }
-        })
-    recycler.adapter = adapter
+
+        val adapter = SourceListAdapter(::onSourceSelected)
+
+
+//        val adapter = SourceListAdapter(object :
+//            OnSourceSelectedListener {
+//            override fun onSourceSelected(sourceItem: SourceItem) {
+//                this@SourceListFragment.onSourceSelected(sourceItem)
+//            }
+//        })
+        recycler.adapter = adapter
         viewModel.data.observe(this, Observer { newData ->
             adapter.setItems(newData)
         })
     }
 
-    fun onSourceSelected(source: Source) {
-        (requireActivity() as MainActivity).showNewsList(source)
-    }
+    fun onSourceSelected(source: SourceItem) {
+        (requireActivity() as MainActivity).showNews(source)
     }
 
-
-interface OnSourceSelectedListener {
-    fun onSourceSelected(source: Source)
+    companion object {
+        fun newInstance() =
+            SourceListFragment()
+    }
 }
+
+

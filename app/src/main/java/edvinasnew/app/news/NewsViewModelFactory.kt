@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class NewsViewModelFactory(private val application: Application) : ViewModelProvider.AndroidViewModelFactory(
+class NewsViewModelFactory(private val application: Application, private val sourceId: String) : ViewModelProvider.AndroidViewModelFactory(
     application
 ) {
 
@@ -32,6 +32,6 @@ class NewsViewModelFactory(private val application: Application) : ViewModelProv
 
         val service = retrofit.create(NewsService::class.java)
 
-        return NewsViewModel(service) as T
+        return NewsViewModel(service, sourceId) as T
     }
 }

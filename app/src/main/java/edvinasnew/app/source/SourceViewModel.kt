@@ -9,10 +9,10 @@ import retrofit2.Response
 
 
     class SourceViewModel(
-        val service: SourceService
+        service: SourceService
     ): ViewModel(){
-        private val _data = MutableLiveData<List<Source>>()
-        val data: LiveData<List<Source>> get() = _data
+        private val _data = MutableLiveData<List<SourceItem>>()
+        val data: LiveData<List<SourceItem>> get() = _data
 
         init {
             service.getSources().enqueue(object : Callback<SourceListResponse> {
@@ -25,7 +25,7 @@ import retrofit2.Response
                     response: Response<SourceListResponse>
                 ) {
                     response.body()!!.sources
-                        .map { Source(it.name, it.description) }
+                        .map { SourceItem(it.name, it.description, it.id) }
                         .let { _data.postValue(it) }
                 }
 
