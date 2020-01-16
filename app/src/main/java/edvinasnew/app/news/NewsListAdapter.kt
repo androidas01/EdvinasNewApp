@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import edvinasnew.app.R
-import edvinasnew.app.utils.DownLoadImageTask
 import kotlinx.android.synthetic.main.activity_news.view.*
+
 
 //import kotlinx.android.synthetic.main.item_source.view.*
 
-class NewsListAdapter(
-    //val onSelected: (NewsItem) -> Unit
-) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val list = mutableListOf<NewsItem>()
 
@@ -50,7 +49,14 @@ class NewsListAdapter(
             itemView.title.text = source.title
             itemView.description.text = source.description
             itemView.datetime.text = source.date
-            DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
+            //DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
+
+
+            Glide.with(itemView)
+                .load(source.urlToImage)
+                .into(itemView.imageUrl)
+
+
             //itemView.image.setImageResource(source.image)
 //            itemView.setOnClickListener {
 //                onSelected(source)
