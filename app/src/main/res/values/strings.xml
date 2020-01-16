@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">EdvinasNewApp</string>
     <string name="Puslapis">Puslapis</string>
+    <string name="popular_today">Popular Today</string>
+    <string name="popular_all_time">Popular All The Time</string>
+    <string name="newest">Newest</string>
+
 </resources>

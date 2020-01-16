@@ -1,17 +1,15 @@
 package edvinasnew.app.main
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import android.view.View
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import edvinasnew.app.news.NewsListFragment
 import edvinasnew.app.R
-import edvinasnew.app.article.ArticleFragment
-import edvinasnew.app.news.NewsItem
+import edvinasnew.app.news.NewsListFragment
 import edvinasnew.app.source.SourceItem
 import edvinasnew.app.source.SourceListFragment
-import edvinasnew.app.tutorial.TutorialActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +33,12 @@ class MainActivity : AppCompatActivity() {
             this.showSource()
         }
         //this.showAbout()
+
+        setSupportActionBar(toolbar)
+        actionBar?.setDisplayShowHomeEnabled(true)
+        title = "Source List"
+
+
     }
 
 //    private fun showTutorial() {
@@ -49,8 +53,9 @@ class MainActivity : AppCompatActivity() {
 
     fun showNews(source: SourceItem) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, NewsListFragment.newInstance(source.id))
+            .addToBackStack(null)
+            .replace(R.id.container, NewsListFragment.newInstance(source))
             .commit()
     }
 
-   }
+}
