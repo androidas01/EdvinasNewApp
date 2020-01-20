@@ -18,8 +18,4 @@ class MainViewModel constructor(
             preferences.edit().putBoolean("tutorial_is_shown", true).apply()
         }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }
