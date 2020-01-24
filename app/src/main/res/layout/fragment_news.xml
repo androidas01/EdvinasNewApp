@@ -31,8 +31,6 @@
             app:checkedChip="@id/chip_popular_today"
             app:singleSelection="true">
 
-
-
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_popular_today"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -59,7 +57,6 @@
 
         </com.google.android.material.chip.ChipGroup>
     </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
