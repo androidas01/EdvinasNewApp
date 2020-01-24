@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import edvinasnew.app.source.SourceService
 import edvinasnew.app.source.SourceViewModel
+import edvinasnew.app.utils.database.NewsDatabase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,6 +33,7 @@ class NewsViewModelFactory(private val application: Application, private val sou
 
         val service = retrofit.create(NewsService::class.java)
 
-        return NewsViewModel(service, sourceId) as T
+        return NewsViewModel(service, sourceId,
+            NewsDatabase.getInstance(application).articleDao) as T
     }
 }

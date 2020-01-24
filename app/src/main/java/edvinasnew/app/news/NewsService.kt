@@ -24,4 +24,6 @@ interface NewsService {
         @Query("sources") sourceId: String,
         @Query("from") fromDate: String
     ): Call<NewsListResponse>
+
+
 }

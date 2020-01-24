@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/article_title"
+    <ImageView
+        android:id="@+id/Nuotrauka"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text=""
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/Author"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_gravity="right"/>
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_gravity="right"/>
+
+    <Button
+        android:id="@+id/article_readFull"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="READ FULL ARTICLE ONLINE" />
+
 </LinearLayout>

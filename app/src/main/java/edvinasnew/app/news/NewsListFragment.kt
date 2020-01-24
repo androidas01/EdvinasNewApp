@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
 import edvinasnew.app.source.SourceItem
+import edvinasnew.app.tutorial.TutorialActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_news.*
+import kotlinx.android.synthetic.main.fragment_news.recycler
 import kotlinx.android.synthetic.main.fragment_tutorial.*
 
 
@@ -53,8 +55,12 @@ class NewsListFragment() : Fragment() {
         //
 //        (requireActivity() as MainActivity).setSupportActionBar(toolbar)
 //        (requireActivity() as MainActivity).actionBar?.setDisplayHomeAsUpEnabled(true)
-        (requireActivity() as MainActivity).title = arguments!!.getString(KEY_SOURCE_TITLE)
+        //(requireActivity() as MainActivity).title = arguments!!.getString(KEY_SOURCE_TITLE)
 
+
+        (requireActivity() as MainActivity).setSupportActionBar(toolbar)
+        (requireActivity() as MainActivity).actionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).title = arguments!!.getString(KEY_SOURCE_TITLE)
 
 
 
@@ -81,7 +87,8 @@ class NewsListFragment() : Fragment() {
 //            )
         //)
 
-        val adapter = NewsListAdapter()
+        val adapter = NewsListAdapter(::onSourceSelected)
+
         recycler.adapter = adapter
         viewModel.data.observe(this, Observer { newData ->
             adapter.setItems(newData)
@@ -90,6 +97,12 @@ class NewsListFragment() : Fragment() {
         chip_popular_all_time.setOnClickListener{
             viewModel.onAllTimeArticlesSelected()
         }
+
+        chip_popular_today.setOnClickListener{
+            viewModel.onPopularTodayArticlesSelected()
+        }
+
+
     }
 
 //    fun onArticleSelected(article: NewsItem) {
@@ -97,6 +110,11 @@ class NewsListFragment() : Fragment() {
 //            article
 //        )
 //    }
+
+    fun onSourceSelected(source: NewsItem) {
+        (requireActivity() as MainActivity).showArticle(source)
+    }
+
     companion object {
         private const val KEY_SOURCE_TITLE = "key_source_title"
         private const val KEY_SOURCE_ID = "key_source_id"

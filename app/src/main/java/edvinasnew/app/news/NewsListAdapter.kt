@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
+import edvinasnew.app.source.SourceItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_news.view.*
 import java.text.SimpleDateFormat
@@ -19,7 +20,7 @@ import java.util.*
 
 //import kotlinx.android.synthetic.main.item_source.view.*
 
-class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
+class NewsListAdapter(val onSelected: (NewsItem) -> Unit) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val list = mutableListOf<NewsItem>()
 
@@ -76,6 +77,9 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
             //source.date
 
+            itemView.setOnClickListener {
+                onSelected.invoke(source)
+            }
 
             //DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
 

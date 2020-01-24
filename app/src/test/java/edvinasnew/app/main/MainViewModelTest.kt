@@ -38,7 +38,6 @@ class MainViewModelTest {
         viewModel.showTutorial.observeForever(observer)
 
         verify(observer).onChanged(Unit)
-
     }
 
     @Test

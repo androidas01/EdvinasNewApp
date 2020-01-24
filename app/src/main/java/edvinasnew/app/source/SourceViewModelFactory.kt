@@ -3,11 +3,11 @@ package edvinasnew.app.source
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import edvinasnew.app.utils.database.NewsDatabase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 class SourceViewModelFactory(private val application: Application) :
     ViewModelProvider.AndroidViewModelFactory(
@@ -29,7 +29,8 @@ class SourceViewModelFactory(private val application: Application) :
 
         val service = retrofit.create(SourceService::class.java)
 
-        return SourceViewModel(service) as T
+        return SourceViewModel(service,
+            NewsDatabase.getInstance(application).sourceDao) as T
     }
 
 }

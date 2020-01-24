@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
+import edvinasnew.app.tutorial.TutorialActivity
 import kotlinx.android.synthetic.main.fragment_source.*
 
 class SourceListFragment : Fragment() {
 
     lateinit var viewModel: SourceViewModel
+
+    //service: SourceService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +57,22 @@ class SourceListFragment : Fragment() {
         viewModel.data.observe(this, Observer { newData ->
             adapter.setItems(newData)
         })
+
+        (requireActivity() as MainActivity).setSupportActionBar(toolbar)
+        (requireActivity() as MainActivity).actionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).title = "Source List"
+
+
+        view.findViewById<Button>(R.id.sort).setOnClickListener {
+            //(requireActivity() as SourceViewModel).sort()
+            //Toast.makeText(this.context, "gggg", Toast.LENGTH_LONG).show()
+            var checksort = viewModel.sort()
+            if (checksort == false) {
+                (requireActivity() as MainActivity).sort.text = "SORT A -> Z"
+            } else {
+                (requireActivity() as MainActivity).sort.text = "SORT Z -> A"
+            }
+        }
     }
 
     fun onSourceSelected(source: SourceItem) {
