@@ -29,19 +29,19 @@
         android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_gravity="right"/>
+        android:layout_gravity="end"/>
 
     <TextView
         android:id="@+id/Date"
         android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_gravity="right"/>
+        android:layout_gravity="end"/>
 
     <Button
         android:id="@+id/article_readFull"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="READ FULL ARTICLE ONLINE" />
+        android:text="@string/read_full_article_online" />
 
 </LinearLayout>

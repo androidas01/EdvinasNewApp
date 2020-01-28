@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">EdvinasNewApp</string>
-    <string name="Puslapis">Puslapis</string>
     <string name="popular_today">Popular Today</string>
     <string name="popular_all_time">Popular All The Time</string>
     <string name="newest">Newest</string>
     <string name="Favorites_now">Favorites for now..</string>
+    <string name="sort_a_z"><![CDATA[Sort A -> Z]]></string>
+    <string name="read_full_article_online">READ FULL ARTICLE ONLINE</string>
+    <string name="tutorial_screen_must_be_shown_until_the_user_fully_completes_the_tutorial_meaning_has_pressed_the_done_button_at_least_once_after_this_action_the_user_should_not_see_the_tutorial_screen_until_the_app_s_memory_is_wiped">Tutorial screen must be shown until the user fully completes the tutorial, meaning has pressed the “Done” button at least once. After this action, the user should not see the tutorial screen, until the app’s memory is wiped.</string>
+    <string name="next">next</string>
+    <string name="source">source</string>
+    <string name="favorite">favorite</string>
+    <string name="about">about</string>
 
 </resources>

@@ -10,7 +10,7 @@ tools:context=".main.MainActivity">
     android:id="@+id/textView"
     android:layout_width="262dp"
     android:layout_height="wrap_content"
-    android:text="Tutorial screen must be shown until the user fully completes the tutorial, meaning has pressed the “Done” button at least once. After this action, the user should not see the tutorial screen, until the app’s memory is wiped."
+    android:text="@string/tutorial_screen_must_be_shown_until_the_user_fully_completes_the_tutorial_meaning_has_pressed_the_done_button_at_least_once_after_this_action_the_user_should_not_see_the_tutorial_screen_until_the_app_s_memory_is_wiped"
     app:layout_constraintBottom_toTopOf="@+id/next"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.496"
@@ -35,7 +35,7 @@ tools:context=".main.MainActivity">
     android:id="@+id/next"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="next"
+    android:text="@string/next"
     android:layout_marginBottom="50dp"
 
     app:layout_constraintBottom_toBottomOf="parent"

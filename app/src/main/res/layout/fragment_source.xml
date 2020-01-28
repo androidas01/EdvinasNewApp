@@ -17,7 +17,7 @@
             android:id="@+id/sort"
             android:layout_width="140dp"
             android:layout_height="50dp"
-            android:text="Sort A -> Z"
+            android:text="@string/sort_a_z"
             android:layout_gravity="center"
             tools:visibility="visible" />
     </androidx.appcompat.widget.Toolbar>

@@ -5,16 +5,16 @@
     <item
         android:id="@+id/bottom_navigation_source"
         android:icon="@drawable/source"
-        android:title="source" />
+        android:title="@string/source" />
 
     <item
         android:id="@+id/bottom_navigation_favorite"
         android:icon="@drawable/favorit"
-        android:title="favorite" />
+        android:title="@string/favorite" />
 
     <item
         android:id="@+id/bottom_navigation_about"
         android:icon="@drawable/about"
-        android:title="about" />
+        android:title="@string/about" />
 
 </menu>
