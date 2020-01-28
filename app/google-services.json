@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "849619611118",
+    "firebase_url": "https://android-learn-73818.firebaseio.com",
+    "project_id": "android-learn-73818",
+    "storage_bucket": "android-learn-73818.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849619611118:android:4dd6a47e70dd65604f32ff",
+        "android_client_info": {
+          "package_name": "edvinasnew.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWR_rHD3JfqLvRYbjIbkV9zFUCBbTp7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

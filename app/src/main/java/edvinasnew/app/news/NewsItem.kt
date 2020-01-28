@@ -10,5 +10,7 @@ data class NewsItem(
     val description: String,
     val date: String,
     val author: String,
-    val url: String
+    val url: String,
+    val favorite: Boolean = false
+    //val sourceid: String
 ) : Parcelable

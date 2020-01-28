@@ -80,6 +80,7 @@ class NewsViewModel(
                                     it.publishedAt,
                                     it.author,
                                     it.url
+                                    //it.sourceid
                                 )
                             }
                             .map {
@@ -105,7 +106,9 @@ class NewsViewModel(
                                     it.description!!,
                                     it.publishedAt,
                                     it.author!!,
-                                    it.url
+                                    it.url,
+                                    it.favorite
+                                    //it.sourceId
                                 )
                             }
                             .let { _data.postValue(it) }
@@ -137,7 +140,9 @@ class NewsViewModel(
                                 it.description,
                                 it.publishedAt,
                                 it.author,
-                                it.url
+                                it.url//,
+                                //it.favorite,
+                                //it.sourceid
                             )
                         }
                         .let { _data.postValue(it) }
@@ -156,21 +161,60 @@ class NewsViewModel(
                     call: Call<NewsListResponse>,
                     response: Response<NewsListResponse>
                 ) {
-                    response.body()!!.articles
-                        .map {
-                            NewsItem(
-                                it.urlToImage,
-                                it.title,
-                                it.description,
-                                it.publishedAt,
-                                it.author,
-                                it.url
-                            )
-                        }
-                        .let { _data.postValue(it) }
+                    thread {
+                        response.body()!!.articles
+                            .map {
+                                NewsItem(
+                                    it.urlToImage,
+                                    it.title,
+                                    it.description,
+                                    it.publishedAt,
+                                    it.author,
+                                    it.url
+                                    //it.sourceid
+
+                                )
+                            }
+                            .map {
+                                ArticleEntity(
+                                    sourceId = sourceId,
+                                    chipId = 1,
+                                    author = it.author,
+                                    title = it.title,
+                                    description = it.description,
+                                    url = it.url,
+                                    urlToImage = it.urlToImage,
+                                    publishedAt = it.date,
+                                    favorite = false
+                                )
+                            }
+                            .also { articleDao.deleteAll(sourceId, 1) }
+                            .also { articleDao.insert(it) }
+                            .let { articleDao.query(sourceId, 1) }
+                            .map {
+                                NewsItem(
+                                    it.urlToImage!!,
+                                    it.title!!,
+                                    it.description!!,
+                                    it.publishedAt,
+                                    it.author!!,
+                                    it.url,
+                                    it.favorite
+                                    //it.sourceId
+                                )
+                            }
+                            .let { _data.postValue(it) }
+                    }
                 }
             })
     }
 
+    fun changeArticleFavoriteStatus(article: NewsItem) {
+        thread {
+            articleDao.changeFavoriteStatus(article.url)
+            //getArticlesFromDB(chipid.value!!)
+            this.onPopularTodayArticlesSelected()
+        }
+    }
 
 }

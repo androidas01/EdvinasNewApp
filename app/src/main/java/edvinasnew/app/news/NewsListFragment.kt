@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -87,7 +88,11 @@ class NewsListFragment() : Fragment() {
 //            )
         //)
 
-        val adapter = NewsListAdapter(::onSourceSelected)
+        //val adapter = NewsListAdapter(::onSourceSelected)
+
+        val adapter = NewsListAdapter(::onNewSelected, ::onMakeArticleFavorite)
+
+        //val adapter = NewsListAdapter(::onNewSelected, ::onMakeArticleFavorite)
 
         recycler.adapter = adapter
         viewModel.data.observe(this, Observer { newData ->
@@ -113,6 +118,18 @@ class NewsListFragment() : Fragment() {
 
     fun onSourceSelected(source: NewsItem) {
         (requireActivity() as MainActivity).showArticle(source)
+    }
+
+    private fun onMakeArticleFavorite(article: NewsItem) {
+        viewModel.changeArticleFavoriteStatus(
+            article
+        )
+
+        Toast.makeText(this.context, "Favorite", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onNewSelected(article: NewsItem) {
+        (requireActivity() as MainActivity).showArticle(article)
     }
 
     companion object {
