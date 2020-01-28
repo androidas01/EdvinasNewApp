@@ -11,7 +11,5 @@ class ArticleViewModelFactory(
 ) : ViewModelProvider.AndroidViewModelFactory(
     application
 ) {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ArticleViewModel(article) as T
-    }
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T = ArticleViewModel(article) as T
 }

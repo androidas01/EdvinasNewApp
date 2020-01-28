@@ -15,5 +15,4 @@ class ArticleViewModel(
     init {
         _data.postValue(article)
     }
-
 }

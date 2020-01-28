@@ -1,6 +1,6 @@
 package edvinasnew.app.source
 
-data class SourceListResponse (
+data class SourceListResponse(
     val status: String,
     val sources: List<SourceResponse>
 )

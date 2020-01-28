@@ -8,5 +8,3 @@ data class TutorialScreenConfig(
     val tutorialText: String,
     val tutorialImage: Int
 ) : Parcelable
-
-

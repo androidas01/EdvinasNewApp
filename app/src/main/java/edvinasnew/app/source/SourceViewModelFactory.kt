@@ -32,5 +32,4 @@ class SourceViewModelFactory(private val application: Application) :
         return SourceViewModel(service,
             NewsDatabase.getInstance(application).sourceDao) as T
     }
-
 }

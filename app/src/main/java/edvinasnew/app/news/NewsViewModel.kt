@@ -12,54 +12,24 @@ import retrofit2.Response
 import java.util.*
 import kotlin.concurrent.thread
 
-class NewsViewModel(
+const val CHIP_ID_TODAY = 1
 
+class NewsViewModel(
     private val service: NewsService,
     private val sourceId: String,
     private val articleDao: ArticleDao
-    ): ViewModel() {
+) : ViewModel() {
     private val _data = MutableLiveData<List<NewsItem>>()
     val data: LiveData<List<NewsItem>> get() = _data
 
     init {
-//        service.getTopNewsFromSource(sourceId).enqueue(object : Callback<NewsListResponse> {
-//            override fun onFailure(call: Call<NewsListResponse>, t: Throwable) {
-//                t.printStackTrace()
-//            }
-//
-//            override fun onResponse(
-//                call: Call<NewsListResponse>,
-//                response: Response<NewsListResponse>
-//            ) {
-//                response.body()!!.articles
-//                    .map { NewsItem(it.urlToImage, it.title, it.description, it.publishedAt) }
-//                    .let { _data.postValue(it) }
-//            }
-//
-//        })
         this.onPopularTodayArticlesSelected()
     }
 
     fun onAllTimeArticlesSelected() {
         service
-            .getPopularTodayFromSource(
-                sourceId,
-                formatDate(
-                    Date(
-                        Calendar.getInstance().apply {
-                            time = Date()
-                            add(Calendar.DAY_OF_YEAR, -10)
-                        }.timeInMillis
-                    )
-                ),
-                formatDate(
-                    Date(
-                        Calendar.getInstance().apply {
-                            time = Date()
-                            add(Calendar.DAY_OF_YEAR, -5)
-                        }.timeInMillis
-                    )
-                )
+            .getNews(
+                sourceId
             )
             .enqueue(object : Callback<NewsListResponse> {
                 override fun onFailure(call: Call<NewsListResponse>, t: Throwable) {
@@ -80,7 +50,7 @@ class NewsViewModel(
                                     it.publishedAt,
                                     it.author,
                                     it.url
-                                    //it.sourceid
+                                    // it.sourceid
                                 )
                             }
                             .map {
@@ -96,9 +66,9 @@ class NewsViewModel(
                                     favorite = false
                                 )
                             }
-                            .also { articleDao.deleteAll(sourceId, 1) }
+                            .also { articleDao.deleteAll(sourceId, CHIP_ID_TODAY) }
                             .also { articleDao.insert(it) }
-                            .let { articleDao.query(sourceId, 1) }
+                            .let { articleDao.query(sourceId, CHIP_ID_TODAY) }
                             .map {
                                 NewsItem(
                                     it.urlToImage!!,
@@ -108,7 +78,7 @@ class NewsViewModel(
                                     it.author!!,
                                     it.url,
                                     it.favorite
-                                    //it.sourceId
+                                    // it.sourceId
                                 )
                             }
                             .let { _data.postValue(it) }
@@ -140,9 +110,9 @@ class NewsViewModel(
                                 it.description,
                                 it.publishedAt,
                                 it.author,
-                                it.url//,
-                                //it.favorite,
-                                //it.sourceid
+                                it.url
+                                // it.favorite,
+                                // it.sourceid
                             )
                         }
                         .let { _data.postValue(it) }
@@ -171,7 +141,7 @@ class NewsViewModel(
                                     it.publishedAt,
                                     it.author,
                                     it.url
-                                    //it.sourceid
+                                    // it.sourceid
 
                                 )
                             }
@@ -188,9 +158,9 @@ class NewsViewModel(
                                     favorite = false
                                 )
                             }
-                            .also { articleDao.deleteAll(sourceId, 1) }
+                            .also { articleDao.deleteAll(sourceId, CHIP_ID_TODAY) }
                             .also { articleDao.insert(it) }
-                            .let { articleDao.query(sourceId, 1) }
+                            .let { articleDao.query(sourceId, CHIP_ID_TODAY) }
                             .map {
                                 NewsItem(
                                     it.urlToImage!!,
@@ -200,7 +170,7 @@ class NewsViewModel(
                                     it.author!!,
                                     it.url,
                                     it.favorite
-                                    //it.sourceId
+                                    // it.sourceId
                                 )
                             }
                             .let { _data.postValue(it) }
@@ -212,9 +182,8 @@ class NewsViewModel(
     fun changeArticleFavoriteStatus(article: NewsItem) {
         thread {
             articleDao.changeFavoriteStatus(article.url)
-            //getArticlesFromDB(chipid.value!!)
+            // getArticlesFromDB(chipid.value!!)
             this.onPopularTodayArticlesSelected()
         }
     }
-
 }

@@ -12,12 +12,9 @@ import kotlinx.android.synthetic.main.activity_news.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-//import kotlinx.android.synthetic.main.item_source.view.*
-
-class NewsListAdapter(val onSelected: (NewsItem) -> Unit,
-                      val onFavorite: (NewsItem) -> Unit
-
+class NewsListAdapter(
+    val onSelected: (NewsItem) -> Unit,
+    val onFavorite: (NewsItem) -> Unit
 ) : RecyclerView.Adapter<NewsListAdapter.ViewHolder>() {
 
     private val list = mutableListOf<NewsItem>()
@@ -25,19 +22,15 @@ class NewsListAdapter(val onSelected: (NewsItem) -> Unit,
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.activity_news,
-                parent,
-                false
-            )
+    ): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.activity_news,
+            parent,
+            false
         )
-    }
+    )
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(list[position])
@@ -56,48 +49,46 @@ class NewsListAdapter(val onSelected: (NewsItem) -> Unit,
 
             itemView.title.text = newsItem.title
 
-
             itemView.description.text = newsItem.description
 
-            //var parsedDate = source.date
+            // var parsedDate = source.date
 
-            //val current = LocalDateTime.now()
+            // val current = LocalDateTime.now()
 
-            //val formatter = DateTimeFormatter.ofPattern(source.date)
+            // val formatter = DateTimeFormatter.ofPattern(source.date)
 
-            //itemView.datetime.text = source.date
+            // itemView.datetime.text = source.date
             val pareseDateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
             val displayDateFormatter = SimpleDateFormat("yyyy MM dd", Locale.US)
-            val date=  pareseDateFormatter.parse(newsItem.date)
+            val date = pareseDateFormatter.parse(newsItem.date)
             itemView.datetime.text = displayDateFormatter.format(date)
 
-            //DateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH).format(source.date)
+            // DateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH).format(source.date)
 
-            //source.date
+            // source.date
 
             itemView.setOnClickListener {
                 onSelected.invoke(newsItem)
             }
 
-            //DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
-
+            // DownLoadImageTask(itemView.imageUrl).execute(source.urlToImage)
 
             Glide.with(itemView)
                 .load(newsItem.urlToImage)
                 .placeholder(R.drawable.loading)
                 .into(itemView.imageUrl)
 
-
-            //itemView.image.setImageResource(source.image)
-//            itemView.setOnClickListener {
-//                onSelected(source)
-//            }
+            // itemView.image.setImageResource(source.image)
+            // itemView.setOnClickListener {
+            // onSelected(source)
+            // }
 
             itemView.button_make_favorite.setOnClickListener {
                 onFavorite(newsItem)
             }
 
-            itemView.button_make_favorite.setImageResource(if(newsItem.favorite) R.drawable.star else R.drawable.star_off)
+            itemView.button_make_favorite.setImageResource(
+                if (newsItem.favorite) R.drawable.star else R.drawable.star_off)
         }
     }
 }

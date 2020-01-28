@@ -2,10 +2,6 @@ package edvinasnew.app.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,9 +13,6 @@ import edvinasnew.app.news.NewsItem
 import edvinasnew.app.news.NewsListFragment
 import edvinasnew.app.source.SourceItem
 import edvinasnew.app.source.SourceListFragment
-import edvinasnew.app.tutorial.TutorialActivity
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
@@ -27,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener {
@@ -40,38 +32,23 @@ class MainActivity : AppCompatActivity() {
         )
             .get(MainViewModel::class.java)
 
-//        viewModel.showTutorial.observe(this, Observer { newData ->
-//            this.showTutorial()
-//        })
+        // viewModel.showTutorial.observe(this, Observer { newData ->
+        // this.showTutorial()
+        // })
 
         if (savedInstanceState == null) {
             this.showSource()
         }
-        //this.showAbout()
+        // this.showAbout()
 
-//        setSupportActionBar(toolbar)
-//        actionBar?.setDisplayShowHomeEnabled(true)
-//        title = "Source List"
-
-//        findViewById<Button>(R.id.bottom_navigation_source).setOnClickListener {
-//            //            supportFragmentManager.beginTransaction()
-////                .replace(R.id.container, TutorialActivity)
-////                .commit()
-//            //Toast.makeText(this.context, "gggg", Toast.LENGTH_LONG).show()
-//
-//        }
-
-
+        // setSupportActionBar(toolbar)
+        // actionBar?.setDisplayShowHomeEnabled(true)
+        // title = "Source List"
     }
-
-
-
 
 //    private fun showTutorial() {
 //        startActivity(Intent(this, TutorialActivity::class.java))
 //    }
-
-
 
     private fun showSource() {
         supportFragmentManager.beginTransaction()
@@ -84,7 +61,6 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .replace(R.id.container, NewsListFragment.newInstance(source))
             .commit()
-
     }
 
     fun showArticle(source: NewsItem) {
@@ -132,5 +108,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-

@@ -1,19 +1,18 @@
 package edvinasnew.app.news
 
-
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import edvinasnew.app.source.SourceService
-import edvinasnew.app.source.SourceViewModel
 import edvinasnew.app.utils.database.NewsDatabase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-class NewsViewModelFactory(private val application: Application, private val sourceId: String) : ViewModelProvider.AndroidViewModelFactory(
+class NewsViewModelFactory(
+    private val application: Application,
+    private val sourceId: String
+) : ViewModelProvider.AndroidViewModelFactory(
     application
 ) {
 

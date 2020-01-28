@@ -10,10 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.concurrent.thread
 
-class SourceViewModel(
-        service: SourceService,
-        private val sourceDao: SourceDao
-    ): ViewModel() {
+class SourceViewModel(service: SourceService, private val sourceDao: SourceDao) : ViewModel() {
 
     private val _data = MutableLiveData<List<SourceItem>>()
     val data: LiveData<List<SourceItem>> get() = _data
@@ -51,14 +48,8 @@ class SourceViewModel(
     fun sort(): Boolean {
 
         sortbool = !sortbool
-        _data.postValue(
-            when (sortbool) {
-                false ->
-                    (_data.value ?: listOf()).sortedBy { it.title }
-                else ->
-                    (_data.value ?: listOf()).sortedByDescending { it.title }
-            }
-        )
+        _data.postValue(if (sortbool == false) (_data.value ?: listOf()).sortedBy { it.title }
+        else (_data.value ?: listOf()).sortedByDescending { it.title })
 
         return sortbool
     }

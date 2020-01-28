@@ -1,12 +1,11 @@
 package edvinasnew.app.news
-
-data class NewsListResponse (
+data class NewsListResponse(
     val status: String,
     val totalResults: Int,
     val articles: List<ArticleResponse>
 )
 
-class ArticleResponse (
+data class ArticleResponse(
     val source: ArticleSourceResponse,
     val author: String,
     val title: String,
@@ -14,17 +13,12 @@ class ArticleResponse (
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
-    val content: String?//,
-    //val favorite: Boolean,
-    //val sourceid: String
-
+    val content: String?
+    // val favorite: Boolean,
+    // val sourceid: String
 )
 
-class ArticleSourceResponse (
+data class ArticleSourceResponse(
     val id: String?,
     val name: String
 )
-
-
-
-

@@ -13,10 +13,8 @@ interface NewsService {
     fun getTopNewsFromSource(@Query("sources") sourceId: String): Call<NewsListResponse>
 
     @GET("/v2/everything?apiKey=212aa54440134caa9a597961e8a8e8c3")
-    fun getPopularTodayFromSource(
-        @Query("sources") sourceId: String,
-        @Query("from") fromDate: String,
-        @Query("to") toDate: String
+    fun getNews(
+        @Query("sources") sourceId: String
     ): Call<NewsListResponse>
 
     @GET("/v2/everything")
@@ -24,6 +22,4 @@ interface NewsService {
         @Query("sources") sourceId: String,
         @Query("from") fromDate: String
     ): Call<NewsListResponse>
-
-
 }

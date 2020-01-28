@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
-import edvinasnew.app.news.NewsListFragment
 import kotlinx.android.synthetic.main.fragment_about.*
-import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news.toolbar
-import kotlinx.android.synthetic.main.fragment_tutorial.*
 
 class AboutFragment : Fragment() {
 
@@ -20,11 +17,10 @@ class AboutFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_about, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,5 +39,4 @@ class AboutFragment : Fragment() {
             return fragment
         }
     }
-
 }

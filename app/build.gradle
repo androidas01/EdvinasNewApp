@@ -1,9 +1,14 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
+
+apply from: 'config/quality-kotlin.gradle'
+
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -23,6 +28,11 @@ android {
         }
     }
 
+    lintOptions {
+        disable 'InvalidPackage', 'ContentDescription', 'PrivateResource' // exclude warnings
+        abortOnError false // continue execution on warnings
+    }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -49,6 +59,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
 
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+
 
     kapt 'androidx.lifecycle:lifecycle-compiler:2.1.0'
 

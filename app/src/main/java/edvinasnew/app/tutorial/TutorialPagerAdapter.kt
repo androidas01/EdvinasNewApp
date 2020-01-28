@@ -1,12 +1,11 @@
 package edvinasnew.app.tutorial
 
-import android.content.res.Resources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import edvinasnew.app.R
 
-class TutorialPagerAdapter(fragmentManager: FragmentManager, private val resources: Resources) :
+class TutorialPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager) {
     val configs = listOf(
         TutorialScreenConfig(
@@ -23,11 +22,8 @@ class TutorialPagerAdapter(fragmentManager: FragmentManager, private val resourc
         )
     )
 
-    override fun getItem(position: Int): Fragment {
-        return TutorialItemFragment.newInstance(configs[position])
-    }
+    override fun getItem(position: Int): Fragment =
+        TutorialItemFragment.newInstance(configs[position])
 
-    override fun getCount(): Int {
-        return configs.size
-    }
+    override fun getCount(): Int = configs.size
 }

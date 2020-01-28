@@ -5,7 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [SourceEntity::class, ArticleEntity::class], version = 7)
+const val VERSION = 7
+
+@Database(entities = [SourceEntity::class, ArticleEntity::class], version = VERSION)
 abstract class NewsDatabase : RoomDatabase() {
     abstract val sourceDao: SourceDao
     abstract val articleDao: ArticleDao

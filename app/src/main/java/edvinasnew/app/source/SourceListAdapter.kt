@@ -26,9 +26,7 @@ class SourceListAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(list[position])
@@ -50,5 +48,3 @@ class SourceListAdapter(
         }
     }
 }
-
-

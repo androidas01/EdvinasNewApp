@@ -12,8 +12,8 @@ class TutorialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tutorial)
 
         val adapter = TutorialPagerAdapter(
-            supportFragmentManager,
-            resources
+            supportFragmentManager
+            // resources
         )
 
         viewPager.adapter = adapter
