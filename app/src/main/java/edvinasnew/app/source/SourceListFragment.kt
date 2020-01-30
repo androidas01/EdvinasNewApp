@@ -1,10 +1,9 @@
 package edvinasnew.app.source
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,7 +24,39 @@ class SourceListFragment : Fragment() {
             SourceViewModelFactory(requireActivity().application)
         )
             .get(SourceViewModel::class.java)
+            setHasOptionsMenu(true) // menu add search #1
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) { // menu add search #2
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.source_fragment_menu, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.onSearch(query!!)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+
+        menu.findItem(R.id.action_search)
+            .setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                    return true
+                }
+
+                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    viewModel.onCreate()
+                    return true
+                }
+            })
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

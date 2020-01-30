@@ -48,7 +48,8 @@ class NewsListFragment : Fragment() {
         // (requireActivity() as MainActivity).title = arguments!!.getString(KEY_SOURCE_TITLE)
 
         (requireActivity() as MainActivity).setSupportActionBar(toolbar)
-        (requireActivity() as MainActivity).actionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as MainActivity).title = arguments!!.getString(KEY_SOURCE_TITLE)
 
         recycler.layoutManager = LinearLayoutManager(requireContext())
@@ -64,6 +65,10 @@ class NewsListFragment : Fragment() {
         viewModel.data.observe(this, Observer { newData ->
             adapter.setItems(newData)
         })
+
+        toolbar.setNavigationOnClickListener {
+            (requireActivity() as MainActivity).supportFragmentManager.popBackStack()
+        }
 
         chip_popular_all_time.setOnClickListener {
             viewModel.onAllTimeArticlesSelected()

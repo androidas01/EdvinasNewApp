@@ -11,5 +11,6 @@
     <string name="source">source</string>
     <string name="favorite">favorite</string>
     <string name="about">about</string>
+    <string name="search">search</string>
 
 </resources>

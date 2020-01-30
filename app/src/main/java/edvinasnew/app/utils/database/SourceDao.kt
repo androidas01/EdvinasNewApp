@@ -17,4 +17,18 @@ interface SourceDao {
     """
     )
     fun query(): List<SourceEntity>
+
+    @Query(
+        """
+        SELECT * FROM SourceEntity ORDER BY title DESC
+    """
+    )
+    fun queryDESC(): List<SourceEntity>
+
+    @Query(
+        """
+            SELECT * FROM SourceEntity WHERE upper(title) LIKE '%' || upper(:searchText) || '%'
+        """
+    )
+    fun getSourcesBySearch(searchText: String): List<SourceEntity>
 }

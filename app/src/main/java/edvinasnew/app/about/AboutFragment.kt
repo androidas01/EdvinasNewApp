@@ -25,10 +25,15 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).setSupportActionBar(toolbar)
-        (requireActivity() as MainActivity).actionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as MainActivity).title = "About"
         (requireActivity() as MainActivity).version.text = "Version ??.??.??"
-        (requireActivity() as MainActivity).reserved.text = "2020-..."
+        (requireActivity() as MainActivity).reserved.text = "2020-... EdvinasJ"
+
+        toolbar.setNavigationOnClickListener {
+            (requireActivity() as MainActivity).supportFragmentManager.popBackStack()
+        }
     }
 
     companion object {
