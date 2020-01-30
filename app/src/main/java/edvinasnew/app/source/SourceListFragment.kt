@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_source.*
 
 class SourceListFragment : Fragment() {
@@ -32,28 +33,36 @@ class SourceListFragment : Fragment() {
         inflater.inflate(R.menu.source_fragment_menu, menu)
 
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.onSearch(query!!)
-                return true
-            }
+//        val disposable = Observable.create<String> { emitter ->
+//            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    return true
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    emitter.onNext(newText.orEmpty())
+//                    return true
+//                }
+//            })
+//            emitter.setCancellable { searchView.setOnQueryTextListener(null) }
+//        }
+//            .filter { it.length > 2 }
+//            .debounce(200, TimeUnit.MILLISECONDS)
+//            .subscribe { viewModel.onSearch(it) }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
-
-        menu.findItem(R.id.action_search)
-            .setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-                override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+        val disposable = Observable.create<String> { emitter ->
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
                 }
 
-                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                    viewModel.onCreate()
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    emitter.onNext(newText.orEmpty())
                     return true
                 }
             })
+            emitter.setCancellable { searchView.setOnQueryTextListener(null) }
+        }.subscribe { viewModel.onSearch(it) }
     }
 
 

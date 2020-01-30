@@ -77,6 +77,10 @@ class NewsListFragment : Fragment() {
         chip_popular_today.setOnClickListener {
             viewModel.onPopularTodayArticlesSelected()
         }
+
+        chip_newest.setOnClickListener {
+            viewModel.onNewestArticlesSelected()
+        }
     }
 
     // fun onArticleSelected(article: NewsItem) {

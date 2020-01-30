@@ -1,5 +1,6 @@
 package edvinasnew.app.news
 
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,16 +11,20 @@ interface NewsService {
 //    fun getSources(): Call<NewsListResponse>
 
     @GET("/v2/top-headlines?apiKey=212aa54440134caa9a597961e8a8e8c3")
-    fun getTopNewsFromSource(@Query("sources") sourceId: String): Call<NewsListResponse>
+    fun getTopNewsFromSource(@Query("sources") sourceId: String
+    // ): Call<NewsListResponse>
+    ): Single<NewsListResponse>
 
     @GET("/v2/everything?apiKey=212aa54440134caa9a597961e8a8e8c3")
     fun getNews(
         @Query("sources") sourceId: String
-    ): Call<NewsListResponse>
+    // ): Call<NewsListResponse>
+    ): Single<NewsListResponse>
 
-    @GET("/v2/everything")
+    @GET("/v2/everything?apiKey=212aa54440134caa9a597961e8a8e8c3")
     fun getNewestFromSource(
         @Query("sources") sourceId: String,
         @Query("from") fromDate: String
-    ): Call<NewsListResponse>
+    // ): Call<NewsListResponse>
+    ): Single<NewsListResponse>
 }

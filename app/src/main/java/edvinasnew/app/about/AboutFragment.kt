@@ -29,7 +29,7 @@ class AboutFragment : Fragment() {
         (requireActivity() as MainActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as MainActivity).title = "About"
         (requireActivity() as MainActivity).version.text = "Version ??.??.??"
-        (requireActivity() as MainActivity).reserved.text = "2020-... EdvinasJ"
+        (requireActivity() as MainActivity).reserved.text = "2020-... EdvinasJ "
 
         toolbar.setNavigationOnClickListener {
             (requireActivity() as MainActivity).supportFragmentManager.popBackStack()

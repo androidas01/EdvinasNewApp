@@ -3,10 +3,13 @@ package edvinasnew.app.source
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import edvinasnew.app.news.NewsViewModel
 import edvinasnew.app.utils.database.NewsDatabase
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SourceViewModelFactory(private val application: Application) :
@@ -25,11 +28,12 @@ class SourceViewModelFactory(private val application: Application) :
             .client(client)
             .baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
 
         val service = retrofit.create(SourceService::class.java)
 
         return SourceViewModel(service,
-            NewsDatabase.getInstance(application).sourceDao) as T
+            NewsDatabase.getInstance(application).sourceDao).apply { onCreate() } as T
     }
 }

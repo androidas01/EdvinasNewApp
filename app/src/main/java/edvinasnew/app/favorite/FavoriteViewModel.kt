@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import edvinasnew.app.news.NewsItem
 import edvinasnew.app.utils.database.ArticleDao
+import edvinasnew.app.utils.database.ArticleEntity
 import kotlin.concurrent.thread
 
 class FavoriteViewModel(
@@ -23,19 +24,22 @@ class FavoriteViewModel(
         thread {
             articleDao.getFavorite()
                 .map {
-                    NewsItem(
-                        it.urlToImage!!,
-                        it.title!!,
-                        it.description!!,
-                        it.publishedAt,
-                        it.author!!,
-                        it.url,
-                        it.favorite
-                        // it.sourceId
-                    )
+                    toItem(it)
                 }
                 .let { _data.postValue(it) }
         }
+    }
+
+    private fun toItem(it: ArticleEntity): NewsItem {
+        return NewsItem(
+            it.urlToImage!!,
+            it.title!!,
+            it.description!!,
+            it.publishedAt,
+            it.author!!,
+            it.url,
+            it.favorite
+        )
     }
 
     fun changeArticleFavoriteStatus(article: NewsItem) {
