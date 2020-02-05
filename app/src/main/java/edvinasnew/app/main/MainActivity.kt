@@ -1,10 +1,16 @@
 package edvinasnew.app.main
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.getSystemService
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import edvinasnew.app.R
@@ -26,6 +32,16 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener {
             onBottomNavigationEvent(it)
+        }
+
+
+        // location permissions granting
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            val lastKnownLocation =
+                getSystemService<LocationManager>()?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            Log.e("location", lastKnownLocation.toString())
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 23)
         }
 
         viewModel = ViewModelProviders.of(
@@ -51,6 +67,38 @@ class MainActivity : AppCompatActivity() {
 //    private fun showTutorial() {
 //        startActivity(Intent(this, TutorialActivity::class.java))
 //    }
+
+
+    // location permissions granting and long, lat taking
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 23) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                val lastKnownLocation =
+                    getSystemService<LocationManager>()?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                Log.e("location", lastKnownLocation.toString())
+                Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
+            } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    //oh come on
+                    Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
+                    requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 23)
+                } else {
+                    //explain how to get toi settings
+                    Toast.makeText(this, "always denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+    // finish permissions
 
     private fun showSource() {
         supportFragmentManager.beginTransaction()
