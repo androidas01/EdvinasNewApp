@@ -1,5 +1,7 @@
 package edvinasnew.app.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -106,5 +108,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+    }
+
+    companion object {
+        fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }
