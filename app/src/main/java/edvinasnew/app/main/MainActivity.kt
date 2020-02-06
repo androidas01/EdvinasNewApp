@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun showFavorite() {
+    fun showFavorite() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.container, FavoriteFragment.newInstance())
@@ -158,5 +158,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
+
+        fun createFavorites(context: Context) = Intent(context, FavoriteFragment::class.java)
     }
 }
