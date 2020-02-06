@@ -1,5 +1,7 @@
 package edvinasnew.app.tutorial
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import edvinasnew.app.R
@@ -26,5 +28,9 @@ class TutorialActivity : AppCompatActivity() {
         } else {
             viewPager.currentItem = viewPager.currentItem + 1
         }
+    }
+
+    companion object {
+        fun createIntent(context: Context) = Intent(context, TutorialActivity::class.java)
     }
 }

@@ -14,5 +14,6 @@
     <string name="search">search</string>
     <string name="Grafikas">Grafikas</string>
     <string name="Grafikas2">Grafikas2</string>
+    <string name="common_notification_channel_general">general</string>
 
 </resources>
