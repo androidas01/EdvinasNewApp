@@ -1,17 +1,23 @@
 package edvinasnew.app.main
 
 import android.Manifest
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
+import androidx.core.net.ConnectivityManagerCompat
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import edvinasnew.app.R
 import edvinasnew.app.about.AboutFragment
@@ -25,9 +31,33 @@ import edvinasnew.app.source.SourceListFragment
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
 
+    private val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val connectivityManager = getSystemService<ConnectivityManager>()!!
+            val info =
+                ConnectivityManagerCompat.getNetworkInfoFromBroadcast(connectivityManager, intent)
+            if (info != null && info.isAvailable && info.isConnected) {
+                Toast.makeText(this@MainActivity, "connected", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "disconnected", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                assert(intent.getStringExtra("extra") == "value")
+            }
+        }, IntentFilter("myAction"))
+
+        LocalBroadcastManager.getInstance(this)
+            .sendBroadcast(Intent("myAction").apply { putExtra("extra", "value") })
+
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener {
@@ -79,7 +109,11 @@ class MainActivity : AppCompatActivity() {
                 val lastKnownLocation =
                     getSystemService<LocationManager>()?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 Log.e("location", lastKnownLocation.toString())
-                Toast.makeText(this, "granted : " + lastKnownLocation.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "granted : " + lastKnownLocation.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                     //oh come on
