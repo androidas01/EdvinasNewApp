@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             onBottomNavigationEvent(it)
         }
 
-
         // location permissions granting
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             val lastKnownLocation =
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(Intent(this, TutorialActivity::class.java))
 //    }
 
-
     // location permissions granting and long, lat taking
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 val lastKnownLocation =
                     getSystemService<LocationManager>()?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 Log.e("location", lastKnownLocation.toString())
-                Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "granted : " + lastKnownLocation.toString(), Toast.LENGTH_SHORT).show()
             } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                     //oh come on
@@ -98,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
-    // finish permissions
+    // finish location permissions
 
     private fun showSource() {
         supportFragmentManager.beginTransaction()
