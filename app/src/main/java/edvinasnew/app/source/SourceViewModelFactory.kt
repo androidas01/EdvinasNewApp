@@ -3,6 +3,7 @@ package edvinasnew.app.source
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import edvinasnew.app.BuildConfig
 import edvinasnew.app.news.NewsViewModel
 import edvinasnew.app.utils.database.NewsDatabase
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +27,7 @@ class SourceViewModelFactory(private val application: Application) :
 
         val retrofit = Retrofit.Builder()
             .client(client)
-            .baseUrl("https://newsapi.org")
+            .baseUrl(BuildConfig.SERVER)//.baseUrl("https://newsapi.org")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()

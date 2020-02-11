@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.tomasNewsApp.utils.location.LocationManager
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -17,7 +16,6 @@ import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_about.*
-import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news.toolbar
 
 
@@ -34,7 +32,6 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_about, container, false)
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -142,7 +139,8 @@ class AboutFragment : Fragment() {
 
         val lineDataSet2 = LineDataSet(listData2, getString(R.string.newest))
         lineDataSet2.color = ContextCompat.getColor(this.context!!, R.color.colorPrimary)
-        lineDataSet2.valueTextColor = ContextCompat.getColor(this.context!!, android.R.color.holo_blue_light)
+        lineDataSet2.valueTextColor =
+            ContextCompat.getColor(this.context!!, android.R.color.holo_blue_light)
 
 
         val listData = ArrayList<Entry>()
@@ -159,9 +157,11 @@ class AboutFragment : Fragment() {
 
 
         val lineData = LineData(lineDataSet, lineDataSet2)
-        lineChart?.data =  lineData
+        lineChart?.data = lineData
 
         lineChart.getDescription().setEnabled(false);
+
+
 
         lineChart?.invalidate() //refresh
 

@@ -21,18 +21,56 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release
+    }
+    Properties projectProperties = new Properties()
+    File projectPropertiesFile = project.rootProject.file('signing.properties')
+    if (projectPropertiesFile.exists()) {
+        projectProperties.load(projectPropertiesFile.newDataInputStream())
+        if (projectProperties.containsKey('STORE_FILE')
+                && projectProperties.containsKey('STORE_PASSWORD')
+                && projectProperties.containsKey('KEY_ALIAS')
+                && projectProperties.containsKey('KEY_PASSWORD')) {
+            signingConfigs.release.storeFile = file(projectProperties['STORE_FILE'])
+            signingConfigs.release.storePassword = projectProperties['STORE_PASSWORD']
+            signingConfigs.release.keyAlias = projectProperties['KEY_ALIAS']
+            signingConfigs.release.keyPassword = projectProperties['KEY_PASSWORD']
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            applicationIdSuffix = '.debug'
+            debuggable = true
+        }
+        statging {
+            signingConfig signingConfigs.release
+            applicationIdSuffix = '.staging'
+            debuggable = false
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    flavorDimensions "server" /*, "alalytics"*/
+    productFlavors {
+        prod {
+            dimension "server"
+            buildConfigField("String", "SERVER", "\"https://newsapi.org\"")
+        }
+        dev {
+            dimension "server"
+            buildConfigField("String", "SERVER", "\"https://newsapi.org\"")
+        }
+    }
     lintOptions {
         disable 'InvalidPackage', 'ContentDescription', 'PrivateResource' // exclude warnings
         abortOnError false // continue execution on warnings
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -105,6 +143,8 @@ dependencies {
     //implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
 
 repositories {

@@ -34,6 +34,64 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849619611118:android:dcbe443e6479e2694f32ff",
+        "android_client_info": {
+          "package_name": "edvinasnew.app.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWR_rHD3JfqLvRYbjIbkV9zFUCBbTp7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849619611118:android:043550fdb4e2929e4f32ff",
+        "android_client_info": {
+          "package_name": "edvinasnew.app.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWR_rHD3JfqLvRYbjIbkV9zFUCBbTp7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849619611118-dge6liccc1lg5hvcghqg4ob63j7cpqgh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

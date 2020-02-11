@@ -19,6 +19,7 @@ import androidx.core.net.ConnectivityManagerCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import edvinasnew.app.BuildConfig
 import edvinasnew.app.R
 import edvinasnew.app.about.AboutFragment
 import edvinasnew.app.article.ArticleFragment
