@@ -1,22 +1,45 @@
 package edvinasnew.app.about
 
+//import jdk.nashorn.internal.objects.NativeDate.getTime
+
+//import javax.swing.UIManager.put
+
+//import jdk.nashorn.internal.objects.NativeDate.getTime
+
+import android.content.ContentValues.TAG
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.tomasNewsApp.utils.location.LocationManager
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture
+import com.github.mikephil.charting.utils.MPPointD
 import com.google.android.gms.location.LocationServices
 import edvinasnew.app.R
 import edvinasnew.app.main.MainActivity
+import edvinasnew.app.utils.formatDate
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_about.*
 import kotlinx.android.synthetic.main.fragment_news.toolbar
+import kotlinx.android.synthetic.main.fragment_tutorial.view.*
+import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.absoluteValue
 
 
 class AboutFragment : Fragment() {
@@ -129,18 +152,27 @@ class AboutFragment : Fragment() {
 //        //list.add(secondChartEntity)
 //        lineChart.legendArray = legendArr
 //        lineChart.setList(list)
+//        entries.add(
+//            Entry(
+//                data.getDate().getTime().toFloat(),
+//                data.getValueY().toFloat()
+//            )
+//        )
+
+        val currentDate: String =
+            SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+
         val listData2 = ArrayList<Entry>()
         listData2.add(Entry(0f, 10f))
-        listData2.add(Entry(1f, 20f))
+        listData2.add(Entry(1f, 22f))
         listData2.add(Entry(2f, 30f))
-        listData2.add(Entry(3f, 10f))
+        listData2.add(Entry(3f, 100f))
         listData2.add(Entry(4f, 40f))
         listData2.add(Entry(5f, 20f))
 
         val lineDataSet2 = LineDataSet(listData2, getString(R.string.newest))
-        lineDataSet2.color = ContextCompat.getColor(this.context!!, R.color.colorPrimary)
-        lineDataSet2.valueTextColor =
-            ContextCompat.getColor(this.context!!, android.R.color.holo_blue_light)
+        lineDataSet2.color = ContextCompat.getColor(this.context!!, R.color.colorPrimaryDark)
+        lineDataSet2.valueTextColor = ContextCompat.getColor(this.context!!, android.R.color.holo_blue_light)
 
 
         val listData = ArrayList<Entry>()
@@ -153,17 +185,95 @@ class AboutFragment : Fragment() {
 
         val lineDataSet = LineDataSet(listData, getString(R.string.Grafikas))
         lineDataSet.color = ContextCompat.getColor(this.context!!, R.color.colorAccent)
-        lineDataSet.valueTextColor = ContextCompat.getColor(this.context!!, android.R.color.white)
-
+        lineDataSet.valueTextColor = ContextCompat.getColor(this.context!!, R.color.colorAccent)
 
         val lineData = LineData(lineDataSet, lineDataSet2)
         lineChart?.data = lineData
 
-        lineChart.getDescription().setEnabled(false);
 
 
+        lineChart.getDescription().setEnabled(false)
+
+        lineChart.xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
+
+        val rightYAxis: YAxis = lineChart.getAxisRight()
+        rightYAxis.isEnabled = false
+
+
+        val xAxis: XAxis = lineChart.getXAxis()
+        xAxis.labelRotationAngle = -50f
+
+        //val xAxisLabels = listOf("1", "2", "3", "4", "5", "6")
+        //lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(xAxisLabels)
+
+//Set label count to 5 as we are displaying 5 star rating
+        lineChart.xAxis.setLabelCount(5)
+
+//Now add the labels to be added on the vertical axis
+        val values = arrayOf(
+            formatDate(Calendar.getInstance().time),
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+        )
+
+        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(values)
+
+        lineChart.setTouchEnabled(true)
+
+        // remove backgroud lines
+        //lineChart.getXAxis().setDrawGridLines(false);
+        //lineChart.getAxisLeft().setDrawGridLines(false);
+        //lineChart.getAxisRight().setDrawGridLines(false);
+
+        //  align lagend position
+        lineChart.legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        lineChart.legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        lineChart.legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        lineChart.legend.setDrawInside(false);
 
         lineChart?.invalidate() //refresh
+
+        lineChart.setOnClickListener{click ->
+            //Toast.makeText(this.context, "", Toast.LENGTH_LONG).show()
+
+
+
+            //lineDataSet.color = ContextCompat.getColor(this.context!!, R.color.White)
+            //lineDataSet.valueTextColor = ContextCompat.getColor(this.context!!, R.color.White)
+            //lineDataSet.circleHoleColor = ContextCompat.getColor(this.context!!, R.color.White)
+
+            //lineDataSet.isVisible = false;
+
+
+
+            //listData.clear()
+            //val lineDataSet = LineDataSet(listData, getString(R.string.Grafikas))
+
+            lineDataSet.isVisible = false
+            //val lineData = LineData(lineDataSet, lineDataSet2)
+            //lineChart?.data = lineData
+            //lineChart?.invalidate()
+
+        }
+
+
+        button.setOnClickListener{ click ->
+            Toast.makeText(this.context, "asd", Toast.LENGTH_LONG).show()
+
+            lineDataSet.isVisible = false
+            if (lineDataSet.isVisible == false){
+                lineDataSet.isVisible = true
+            }
+            else{
+                lineDataSet.isVisible = false
+            }
+
+        }
+
+
 
 
         // location
@@ -189,6 +299,7 @@ class AboutFragment : Fragment() {
         super.onDestroyView()
         disposable.dispose()
     }
+
 
     companion object {
         fun newInstance(): AboutFragment {
